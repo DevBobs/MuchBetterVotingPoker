@@ -5,17 +5,22 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    name: Test
+    name: Build and Test frontend
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 15.x] #Run on all node-versions of 14.x and 15.x
+
     steps:
-      - uses: actions/checkout@v2
-      - run: cd ./Frontend
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: test
+    - uses: actions/checkout@v1
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install -g yarn
+    - name: yarn install, build, and test
+      run: |
+        yarn install
+        yarn build
+        yarn test
