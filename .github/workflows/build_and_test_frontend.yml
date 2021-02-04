@@ -3,9 +3,14 @@ on:
   pull_request:
     branches: [ master, develop ]
   workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: Frontend
+
 jobs:
   build:
-    name: Build and Test frontend
+    name: Install dependencies, test and build frontend
     runs-on: ubuntu-latest
 
     strategy:
@@ -14,13 +19,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - run: cd ./Frontend
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install -g yarn
-    - name: yarn install, build, and test
+    - name: Run yarn commands
       run: |
         yarn install
         yarn build
