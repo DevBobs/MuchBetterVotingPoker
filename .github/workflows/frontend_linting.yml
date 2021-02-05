@@ -2,6 +2,7 @@ name: frontend_linting
 
 on:
   push:
+  pull_request:
   workflow_dispatch:
 
 defaults:
