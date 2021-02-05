@@ -4,6 +4,6 @@ import App from './App';
 
 test('renders Hello World', () => {
   render(<App />);
-  const HelloWorldElement = screen.getByText("Hello World");
+  const HelloWorldElement = screen.getByText('Hello World');
   expect(HelloWorldElement).toBeInTheDocument();
 });
