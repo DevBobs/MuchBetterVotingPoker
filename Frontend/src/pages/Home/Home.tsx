@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useStoreActions, useStoreState } from '../../hooks/easy-peasy-hooks';
 import UserEntry from '../../interfaces/UserEntry';
+import Headline1 from '../../components/Headline1/Headline1';
 
 const Home: React.FC = () => {
   const getUsers = useStoreState((state) => state.users.users);
@@ -17,7 +18,7 @@ const Home: React.FC = () => {
   return (
     <div>
       {getUsers.map((user) => (
-        <h1 key={user.id}>{user.name}</h1>
+        <Headline1 key={user.id}>{user.name}</Headline1>
       ))}
     </div>
   );
